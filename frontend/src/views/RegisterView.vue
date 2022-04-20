@@ -16,7 +16,7 @@ const password = ref("");
 
 async function register() {
     console.log(store.url);
-    const response = await axios.post("http://localhost:3000/api/register", {
+    const response = await axios.post("/api/register", {
         email: email.value,
         password: password.value,
     });
