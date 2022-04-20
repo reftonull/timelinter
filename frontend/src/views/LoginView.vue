@@ -11,6 +11,7 @@
 import { ref } from "vue";
 import { store } from "../store.js";
 import axios from "axios";
+import router from "../router";
 
 const email = ref("");
 const password = ref("");
@@ -33,6 +34,8 @@ async function login() {
         store.email = response.data.user.email;
         console.log(store.uid);
     }
+
+    router.push("/timelines");
 
     console.log(response.data);
 }
