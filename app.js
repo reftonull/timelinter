@@ -16,6 +16,8 @@ app.use(express.json({ extended: false }));
 
 if (process.env.NODE_ENV === "production"){
   app.use(express.static(path.resolve(__dirname, "public")));
+
+  app.get(/.*/, (req, res) => res.sendFile(path.resolve(__dirname, "public/index.html")));
 }
 
 // passport setup
