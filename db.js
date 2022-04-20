@@ -19,7 +19,7 @@ const User = new mongoose.Schema({
 });
 
 User.pre("save", async function (next) {
-    let user = this;
+    const user = this;
     try {
         const salt = await bcrypt.genSalt();
         const hash = await bcrypt.hash(user.password, salt);
@@ -60,4 +60,7 @@ const Timeline = new mongoose.Schema({
 mongoose.model("User", User);
 mongoose.model("Timeline", Timeline);
 mongoose.model("Person", Person);
-mongoose.connect(mongoUrl);
+mongoose.connect(process.env.MONGODB_URI || mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
