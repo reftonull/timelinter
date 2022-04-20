@@ -1,9 +1,9 @@
 <template>
     <h1>Timelines</h1>
-    <div class="listItem" v-for="timeline in timelines.values()" :key="timeline.name">
+    <!-- <div class="listItem" v-for="timeline in timelines.values()" :key="timeline.name">
         {{ timeline.name }}
     </div>
-    <div v-if="!timelines.values()"><h3>There are no timelines!</h3></div>
+    <div v-if="!timelines.values()"><h3>There are no timelines!</h3></div> -->
 </template>
 
 <script setup>
@@ -15,7 +15,7 @@ let timelines = shallowRef([]);
 onMounted(async () => {
     const response = await axios.get("/secure/timelines?secret_token=" + store.token +"&id=" + store.uid);
     timelines.value = response.data.timelines;
-    console.log(timelines.value);
+    console.log("api response is: " + timelines.value);
 });
 </script>
 

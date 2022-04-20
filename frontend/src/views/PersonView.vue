@@ -15,6 +15,7 @@ let people = shallowRef([]);
 onMounted(async () => {
     const response = await axios.get("/secure/people?secret_token=" + store.token +"&id=" + store.uid);
     people.value = response.data.people;
+    console.log("api response is: " + people.value);
 });
 </script>
 
