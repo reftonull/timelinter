@@ -21,7 +21,25 @@ router.get("/timelines", async (req, res, next) => {
     });
 });
 
+router.get("/timelines/add", async (req, res, next) => {
+    const timelines = await Timeline.find({}).exec();
+    console.log(timelines);
+
+    res.json({
+        timelines: timelines,
+    });
+});
+
 router.get("/people", async (req, res, next) => {
+    const people = await Person.find({}).exec();
+    console.log(people);
+
+    res.json({
+        people: people,
+    });
+});
+
+router.get("/people/add", async (req, res, next) => {
     const people = await Person.find({}).exec();
     console.log(people);
 
