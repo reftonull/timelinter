@@ -1,14 +1,40 @@
 <script setup>
 import FancyButton from "@/components/FancyButton.vue";
+import { ref } from "vue";
+import { store } from "./store";
+import { onMounted } from "vue";
+
+onMounted(() => {
+    if (sessionStorage.getItem("token")) {
+        store.token = sessionStorage.getItem("token");
+    }
+});
+
+function logout() {
+  sessionStorage.removeItem("token");
+  store.token = null;
+}
 </script>
 
 <template>
     <header>
         <div class="logo">TimeLinter</div>
         <div class="spacer"></div>
-        <div class="buttonRow">
-            <RouterLink to="/register"><div class="register">Register</div></RouterLink>
+        <div v-if="!store.token" class="buttonRow">
+            <RouterLink to="/register"
+                ><div class="register">Register</div></RouterLink
+            >
             <RouterLink to="/login"><FancyButton text="Login" /></RouterLink>
+        </div>
+        <div v-if="store.token" class="buttonRow">
+            <button @click="logout">Logout</button>
+            <RouterLink to="/timelines"
+                ><div class="register">Timelines</div></RouterLink
+            >
+            <RouterLink to="/people"
+                ><div class="register">People</div></RouterLink
+            >
+            <RouterLink to="/add"><FancyButton text="Add" /></RouterLink>
         </div>
     </header>
 

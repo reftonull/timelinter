@@ -3,13 +3,16 @@ require("./auth");
 
 const passport = require("passport");
 const express = require("express");
+const session = require("express-session");
+const cors = require("cors");
 
 const api = require("./routes/api");
 const secureRoute = require('./routes/secure');
 
 const app = express();
 
-app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+app.use(express.json({ extended: false }));
 
 // passport setup
 app.use(passport.initialize());

@@ -1,34 +1,27 @@
 <template>
     <div class="form">
-        <p>Email is: {{ email }} and password is: {{ password }}</p>
         <input type="text" placeholder="Email" v-model="email" />
-        <input
-            type="password"
-            placeholder="Password"
-            v-model="password"
-        />
+        <input type="password" placeholder="Password" v-model="password" />
         <button @click="register">Register</button>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
+import { store } from "../store.js";
+import axios from "axios";
 
-const email = ref('')
-const password = ref('')
+const email = ref("");
+const password = ref("");
 
 async function register() {
-    const response = await fetch("api/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password,
-        }),
+    console.log(store.url);
+    const response = await axios.post("http://localhost:3000/api/register", {
+        email: email.value,
+        password: password.value,
     });
-    console.log(response);
+
+    console.log(response.data);
 }
 </script>
 

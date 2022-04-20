@@ -1,9 +1,8 @@
 <script setup>
-import TheWelcome from '@/components/TheWelcome.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    Welcome to TimeLinter, an application designed to help you schedule.
   </main>
 </template>
