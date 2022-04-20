@@ -32,10 +32,9 @@ async function login() {
         store.token = response.data.token;
         store.uid = response.data.user._id;
         store.email = response.data.user.email;
+        router.push("/timelines");
         console.log(store.uid);
     }
-
-    router.push("/timelines");
 
     console.log(response.data);
 }
