@@ -3,12 +3,14 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Timeline = mongoose.model("Timeline");
 const Person = mongoose.model("Person");
+const { secret } = require("../config");
+const jwt = require("jsonwebtoken");
 
 router.get("/profile", (req, res) => {
+    const data = jwt.verify(req.query.secret_token, secret);
+
     res.json({
-        message: "You made it to the secure route",
-        user: req.user,
-        token: req.query.secret_token,
+        user: data.user,
     });
 });
 

@@ -1,0 +1,66 @@
+{
+  "node_modules/nuxt/dist/app/entry.mjs": {
+    "file": "entry-ae4777a1.mjs",
+    "src": "node_modules/nuxt/dist/app/entry.mjs",
+    "isEntry": true,
+    "dynamicImports": [
+      "pages/add.vue",
+      "pages/index.vue",
+      "pages/login.vue",
+      "pages/people.vue",
+      "pages/register.vue",
+      "pages/timelines.vue"
+    ],
+    "css": [
+      "entry.d7acb837.css"
+    ]
+  },
+  "pages/add.vue": {
+    "file": "add-36cd3277.mjs",
+    "src": "pages/add.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/index.vue": {
+    "file": "index-e7ff4271.mjs",
+    "src": "pages/index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/login.vue": {
+    "file": "login-73c9e855.mjs",
+    "src": "pages/login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/people.vue": {
+    "file": "people-809c19c8.mjs",
+    "src": "pages/people.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/register.vue": {
+    "file": "register-3df9bc43.mjs",
+    "src": "pages/register.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/timelines.vue": {
+    "file": "timelines-fed913e3.mjs",
+    "src": "pages/timelines.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  }
+}

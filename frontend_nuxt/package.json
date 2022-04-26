@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.1"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.1.8",
+    "axios": "^0.27.0",
+    "pinia": "^2.0.13",
+    "url": "^0.11.0"
+  }
+}
