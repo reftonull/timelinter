@@ -94,6 +94,14 @@
                         </people-modal>
                     </Teleport>
                 </div>
+                <div class="errorContainer" v-if="selected === 'Problems'">
+                    <div v-for="problem in problems" :key="problem.id">
+                        <problem-row
+                            :problem="problem"
+                            @click="selectPerson(problem.person)"
+                        ></problem-row>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="btnRow">
@@ -105,7 +113,9 @@
 <script>
 import VueCal from "vue-cal";
 import { v4 as uuid } from "uuid";
+import { DateTime, Interval } from "luxon";
 import PeopleModal from "../../components/PeopleModal.vue";
+import ProblemRow from "../../components/ProblemRow.vue";
 import "vue-cal/dist/vuecal.css";
 import "vue-cal/dist/drag-and-drop.js";
 import { usePeopleStore } from "../../stores/people";
@@ -118,6 +128,7 @@ export default {
     },
     data: () => ({
         events: [],
+        problems: [],
         selected: "People",
         timeline: {},
         people: [],
@@ -137,10 +148,12 @@ export default {
         this.timeline = timelineStore.getTimeline(route.params.id);
         await this.refreshPeople();
         this.initEvents();
+        this.analyseTimes();
         console.log("timeline is", this.timeline);
     },
     blocks: [],
     backgroundEvents: [],
+    allBackgroundEvents: [],
     methods: {
         async save() {
             const route = useRoute();
@@ -182,8 +195,81 @@ export default {
             event.person = this.selectedPerson._id;
 
             this.$options.blocks.push(event);
+            this.analyseTimes();
 
             return event;
+        },
+
+        updateEvent(obj) {
+            const index = this.$options.blocks.findIndex(
+                (e) => e.id === obj.event.id
+            );
+            console.log(index);
+            if (index !== -1) {
+                this.$options.blocks[index] = obj.event;
+            }
+            this.analyseTimes();
+        },
+
+        analyseTimes() {
+            const problems = [];
+            this.people.forEach((person) => {
+                const personBlocks = this.$options.blocks.filter(
+                    (b) => b.person === person._id
+                );
+
+                personBlocks.forEach((block) => {
+                    let isError = true;
+                    const blockInterval = Interval.fromDateTimes(
+                        block.start,
+                        block.end
+                    );
+                    person.availability.forEach((avail) => {
+                        const availBlock = Interval.fromDateTimes(
+                            new Date(avail.startTime),
+                            new Date(avail.endTime)
+                        );
+                        if (availBlock.engulfs(blockInterval)) {
+                            isError = false;
+                        }
+                    });
+
+                    if (isError) {
+                        problems.push({
+                            id: uuid(),
+                            type: "OutsideBounds",
+                            person: person,
+                            start: block.start,
+                            end: block.end,
+                        });
+                    }
+                });
+            });
+
+            this.problems = problems;
+            console.log(this.problems);
+        },
+
+        setAvailability() {
+            let backgroundEvents = [];
+            this.people.forEach((p) => {
+                const personBackgroundEvents = p.availability.map((a) => {
+                    return {
+                        person: p._id,
+                        start: new Date(a.startTime),
+                        end: new Date(a.endTime),
+                        background: true,
+                        class: "lunch",
+                        deletable: false,
+                        resizable: false,
+                    };
+                });
+                backgroundEvents = [
+                    ...backgroundEvents,
+                    ...personBackgroundEvents,
+                ];
+            });
+            this.$options.allBackgroundEvents = backgroundEvents;
         },
 
         selectPerson(person) {
@@ -224,16 +310,6 @@ export default {
         selectItem(index) {
             this.selectedItem = this.peopleStore.people[index];
             console.log(this.selectedItem);
-        },
-
-        updateEvent(obj) {
-            const index = this.$options.blocks.findIndex(
-                (e) => e.id === obj.event.id
-            );
-            console.log(index);
-            if (index !== -1) {
-                this.$options.blocks[index] = obj.event;
-            }
         },
 
         add() {
@@ -301,6 +377,13 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 0;
+    margin-top: 1em;
+}
+
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
     margin-top: 1em;
 }
 

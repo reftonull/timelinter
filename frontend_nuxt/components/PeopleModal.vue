@@ -67,9 +67,6 @@ const props = defineProps({
     margin: 20px 0;
 }
 
-.modal-footer {
-}
-
 
 /*
  * The following styles are auto-applied to elements with

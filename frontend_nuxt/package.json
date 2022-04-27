@@ -12,6 +12,7 @@
   "dependencies": {
     "@pinia/nuxt": "^0.1.8",
     "axios": "^0.27.0",
+    "luxon": "^2.3.2",
     "pinia": "^2.0.13",
     "url": "^0.11.0",
     "uuid": "^8.3.2",
