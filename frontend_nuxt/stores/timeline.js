@@ -58,5 +58,31 @@ export const useTimelineStore = defineStore({
 
             return true;
         },
+
+        async updateBlocks(tid, events) {
+            console.log(events);
+
+            const options = useOptionsStore();
+            await options.setTokenFromStorage();
+
+            const blocks = events.map((e) => {
+                return {
+                    person: e.person,
+                    startTime: new Date(e.start),
+                    endTime: new Date(e.end),
+                };
+            });
+
+            const response = await axios.post(
+                "/secure/timeline/update?secret_token=" + options.token,
+                {
+                    tid: tid,
+                    blocks: blocks,
+                }
+            );
+            console.log(response.data);
+
+            return true;
+        },
     },
 });

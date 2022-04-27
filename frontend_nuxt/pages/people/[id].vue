@@ -22,6 +22,7 @@
             :time-step="30"
             @event-drag-create="createEvent"
             @event-drop="updateEvent"
+            @event-duration-change="updateEvent"
         />
 
         <div @click="save" class="fancyBtn saveBtn">Save</div>

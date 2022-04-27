@@ -1,6 +1,6 @@
 {
   "node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-894a6d49.mjs",
+    "file": "entry-ec39a906.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "dynamicImports": [
@@ -10,14 +10,15 @@
       "pages/people/[...slug].vue",
       "pages/people/[id].vue",
       "pages/register.vue",
-      "pages/timelines.vue"
+      "pages/timelines/[...slug].vue",
+      "pages/timelines/[id].vue"
     ],
     "css": [
-      "entry.6c646fe5.css"
+      "entry.08a2e276.css"
     ]
   },
   "pages/add.vue": {
-    "file": "add-58eef136.mjs",
+    "file": "add-2f38f634.mjs",
     "src": "pages/add.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -25,7 +26,7 @@
     ]
   },
   "pages/index.vue": {
-    "file": "index-c4af945d.mjs",
+    "file": "index-351192a9.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -33,7 +34,7 @@
     ]
   },
   "pages/login.vue": {
-    "file": "login-a50f2e9d.mjs",
+    "file": "login-b9943db5.mjs",
     "src": "pages/login.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -41,7 +42,7 @@
     ]
   },
   "pages/people/[...slug].vue": {
-    "file": "_...slug_-9969e72a.mjs",
+    "file": "_...slug_-0f5f2b8e.mjs",
     "src": "pages/people/[...slug].vue",
     "isDynamicEntry": true,
     "imports": [
@@ -49,27 +50,40 @@
     ]
   },
   "pages/people/[id].vue": {
-    "file": "_id_-65ce50bb.mjs",
+    "file": "_id_-9a51e408.mjs",
     "src": "pages/people/[id].vue",
     "isDynamicEntry": true,
     "imports": [
-      "node_modules/nuxt/dist/app/entry.mjs"
+      "node_modules/nuxt/dist/app/entry.mjs",
+      "_v4-5ff0568a.mjs"
     ]
   },
+  "_v4-5ff0568a.mjs": {
+    "file": "v4-5ff0568a.mjs"
+  },
   "pages/register.vue": {
-    "file": "register-6dee36d1.mjs",
+    "file": "register-0e6d0835.mjs",
     "src": "pages/register.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
-  "pages/timelines.vue": {
-    "file": "timelines-9796e203.mjs",
-    "src": "pages/timelines.vue",
+  "pages/timelines/[...slug].vue": {
+    "file": "_...slug_-186d1e18.mjs",
+    "src": "pages/timelines/[...slug].vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/timelines/[id].vue": {
+    "file": "_id_-17342536.mjs",
+    "src": "pages/timelines/[id].vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs",
+      "_v4-5ff0568a.mjs"
     ]
   }
 }

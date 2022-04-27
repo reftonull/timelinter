@@ -47,7 +47,7 @@ router.post("/timeline/addperson", async (req, res) => {
         timeline.people.push(req.body.pid);
 
         const doc = await timeline.save();
-        
+
         console.log("timeline is ", doc);
         res.json({
             success: true,
@@ -57,6 +57,26 @@ router.post("/timeline/addperson", async (req, res) => {
         console.log(e);
         res.json({ success: false, err: "An error occured." });
     }
+});
+
+router.post("/timeline/update", async (req, res) => {
+    const tid = req.body.tid;
+    const blocks = req.body.blocks;
+
+    console.log(blocks);
+
+    const timeline = await Timeline.findById(tid).exec();
+
+    timeline.blocks = blocks;
+
+    const doc = await timeline.save();
+
+    console.log(doc);
+
+    res.json({
+        success: true,
+        timeline: doc,
+    });
 });
 
 router.post("/people/add", async (req, res) => {

@@ -20,7 +20,8 @@
                 :time-to="23 * 60"
                 :time-step="30"
                 selected-date="2022-04-26"
-                @event-change="changeEvent"
+                @event-drop="updateEvent"
+                @event-duration-change="updateEvent"
                 :on-event-create="onEventCreate"
             />
             <div class="sidebar">
@@ -103,6 +104,7 @@
 
 <script>
 import VueCal from "vue-cal";
+import { v4 as uuid } from "uuid";
 import PeopleModal from "../../components/PeopleModal.vue";
 import "vue-cal/dist/vuecal.css";
 import "vue-cal/dist/drag-and-drop.js";
@@ -134,23 +136,40 @@ export default {
 
         this.timeline = timelineStore.getTimeline(route.params.id);
         await this.refreshPeople();
+        this.initEvents();
         console.log("timeline is", this.timeline);
     },
-    blocks: [
-        {
-            start: "2022-04-26 10:35",
-            end: "2022-04-26 11:30",
-            title: "Doctor appointment",
-            content: '<i class="v-icon material-icons">local_hospital</i>',
-            class: "health",
-        },
-    ],
+    blocks: [],
+    backgroundEvents: [],
     methods: {
-        save() {
+        async save() {
             const route = useRoute();
-            const peopleStore = usePeopleStore();
+            const timelineStore = useTimelineStore();
+
+            await timelineStore.updateBlocks(
+                route.params.id,
+                this.$options.blocks
+            );
 
             console.log("saved");
+        },
+
+        initEvents() {
+            this.$options.blocks = this.timeline.blocks.map((e) => {
+                const person = this.peopleStore.people.find(
+                    (p) => p._id === e.person
+                );
+
+                return {
+                    id: uuid(),
+                    title: person.name,
+                    person: person._id,
+                    start: new Date(e.startTime),
+                    end: new Date(e.endTime),
+                };
+            });
+
+            this.events = this.$options.blocks;
         },
 
         onEventCreate(event, deleteFunction) {
@@ -158,13 +177,34 @@ export default {
                 return false;
             }
 
+            event.id = uuid();
             event.title = this.selectedPerson.name;
-            event.person = this.selectedPerson.id;
+            event.person = this.selectedPerson._id;
+
+            this.$options.blocks.push(event);
+
             return event;
         },
 
         selectPerson(person) {
             this.selectedPerson = person;
+            this.$options.backgroundEvents = person.availability.map((a) => {
+                return {
+                    start: new Date(a.startTime),
+                    end: new Date(a.endTime),
+                    background: true,
+                    class: "lunch",
+                    deletable: false,
+                    resizable: false,
+                };
+            });
+            this.events = [
+                ...this.$options.backgroundEvents,
+                ...this.$options.blocks,
+            ];
+            // this.events = this.$options.blocks;
+            console.log(this.events);
+            console.log(this.$options.backgroundEvents);
         },
 
         async refreshPeople() {
@@ -186,17 +226,14 @@ export default {
             console.log(this.selectedItem);
         },
 
-        changeEvent(event, orig) {
-            // if (orig) {
-            //     const index = this.events.findIndex(
-            //         (e) => e._eid === orig._eid
-            //     );
-            //     this.events[index] = event;
-            // } else {
-            // this.events.push(event);
-            // }
-            console.log(event);
-            console.log(this.events);
+        updateEvent(obj) {
+            const index = this.$options.blocks.findIndex(
+                (e) => e.id === obj.event.id
+            );
+            console.log(index);
+            if (index !== -1) {
+                this.$options.blocks[index] = obj.event;
+            }
         },
 
         add() {
@@ -220,6 +257,23 @@ export default {
     },
 };
 </script>
+
+<style>
+.vuecal__event.lunch {
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        var(--color-background-light) 10px,
+        var(--color-background-light) 20px
+    ); /* IE 10+ */
+    color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1 !important;
+}
+</style>
 
 <style scoped>
 .flex {
