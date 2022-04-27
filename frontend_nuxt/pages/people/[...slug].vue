@@ -1,21 +1,21 @@
 <template>
     <div>
         <h1>People</h1>
-        <div
-            class="listItem"
-            v-for="person in peopleStore.people"
-            :key="person.name"
-        >
-            {{ person.name }}
+        <div v-for="person in peopleStore.people" :key="person.name">
+            <NuxtLink :to="`/people/${person._id}`">
+                <div class="listItem">
+                    {{ person.name }}
+                </div>
+            </NuxtLink>
         </div>
-        <div v-if="!peopleStore.people">
+        <div v-if="peopleStore.people.length === 0">
             <h3>There are no people!</h3>
         </div>
     </div>
 </template>
 
 <script setup>
-import { usePeopleStore } from "../stores/people";
+import { usePeopleStore } from "../../stores/people";
 
 const peopleStore = usePeopleStore();
 
@@ -39,5 +39,6 @@ div {
     background-color: var(--color-background-mute);
     margin: 1em;
     border-radius: 8px;
+    color: var(--color-text);
 }
 </style>

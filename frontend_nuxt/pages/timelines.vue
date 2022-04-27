@@ -8,7 +8,7 @@
         >
             {{ timeline.name }}
         </div>
-        <div v-if="!timelineStore.timelines">
+        <div v-if="timelineStore.timelines.length === 0">
             <h3>There are no timelines!</h3>
         </div>
     </div>

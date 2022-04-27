@@ -4708,6 +4708,11 @@ vue-bundle-renderer@^0.3.6:
   dependencies:
     bundle-runner "^0.0.1"
 
+vue-cal@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/vue-cal/-/vue-cal-4.2.0.tgz#414c48c064f55e3cb9814e08f241d34e0e090bcb"
+  integrity sha512-oJPuIwluNzsu34o2PB8v80iwEt8BkAjLxHVnMtFopvoqQKwwKS/EKPj+TpoeFRILy2iUscDf86WukuGEm163ag==
+
 vue-demi@*:
   version "0.12.5"
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.12.5.tgz#8eeed566a7d86eb090209a11723f887d28aeb2d1"

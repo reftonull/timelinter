@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="appContainer">
         <!-- Markup shared across all pages, ex: NavBar -->
         <header>
             <div class="logo">TIME<strong>LINTER</strong></div>
@@ -90,5 +90,14 @@ header {
     color: #fff;
     margin-right: 18px;
     padding: 8px 1em 8px 1em;
+}
+
+html,body, #__nuxt, #__layout{
+  height:100%!important;
+  width: 100%!important;
+}
+
+.appContainer {
+    height: 100%;
 }
 </style>

@@ -5,6 +5,7 @@ import path from "path";
 export default defineNuxtConfig({
     buildModules: ["@pinia/nuxt"],
     buildDir: path.resolve(__dirname, "../public"),
+    ssr: false,
     vite: {
         server: {
             proxy: {

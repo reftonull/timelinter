@@ -21,6 +21,29 @@ export const usePeopleStore = defineStore({
 
             this.people = response.data.people;
         },
+        async getPersonById(id) {
+            console.log("getting person");
+            const options = useOptionsStore();
+            await options.setTokenFromStorage();
+
+            const query = {
+                secret_token: options.token,
+                id: options.user._id,
+                pid: id,
+            };
+
+            const queryString = new URLSearchParams(query);
+
+            const response = await axios.get("/secure/person?" + queryString);
+
+            console.log(response);
+
+            if (response.data.person) {
+                return response.data.person;
+            } else {
+                return null;
+            }
+        },
 
         async addPerson(name) {
             const options = useOptionsStore();

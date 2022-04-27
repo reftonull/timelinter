@@ -59,11 +59,22 @@ router.post("/people/add", async (req, res) => {
 });
 
 router.get("/people", async (req, res) => {
-    const people = await Person.find({user: req.query.id}).exec();
+    const people = await Person.find({ user: req.query.id }).exec();
     console.log(people);
 
     res.json({
         people: people,
+    });
+});
+
+router.get("/person", async (req, res) => {
+    const personId = req.query.pid;
+    const person = await Person.findById(personId).exec();
+
+    console.log(person);
+
+    res.json({
+        person,
     });
 });
 

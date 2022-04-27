@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import { usePeopleStore } from "./people";
+import { useTimelineStore } from "./timeline";
 
 export const useOptionsStore = defineStore({
     id: "options",
@@ -13,11 +15,17 @@ export const useOptionsStore = defineStore({
 
     actions: {
         logout() {
+            const peopleStore = usePeopleStore();
+            const timelineStore = useTimelineStore();
+
             sessionStorage.removeItem("token");
             this.$patch({
                 token: "",
                 user: { _id: "", email: "" },
             });
+
+            peopleStore.$reset();
+            timelineStore.$reset();
         },
 
         async login(email, password) {
@@ -43,11 +51,12 @@ export const useOptionsStore = defineStore({
         },
 
         async setTokenFromStorage() {
+            console.log("I am here");
             if (sessionStorage.getItem("token")) {
                 const token = sessionStorage.getItem("token");
 
                 const response = await axios.get(
-                    "secure/profile?secret_token=" + token
+                    "/secure/profile?secret_token=" + token
                 );
 
                 this.$patch({
