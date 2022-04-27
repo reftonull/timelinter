@@ -60,5 +60,30 @@ export const usePeopleStore = defineStore({
 
             return true;
         },
+
+        async updateAvail(pid, events) {
+            const options = useOptionsStore();
+            await options.setTokenFromStorage();
+
+            const avail = events.map((e) => {
+                return {
+                    startTime: new Date(e.start),
+                    endTime: new Date(e.end),
+                };
+            });
+
+            const queryString = new URLSearchParams({
+                secret_token: options.token,
+            });
+
+            const response = await axios.post(
+                "/secure/person/update?" + queryString,
+                {
+                    pid: pid,
+                    avail: avail,
+                }
+            );
+            console.log(response.data);
+        },
     },
 });

@@ -1,12 +1,12 @@
 <template>
     <div>
         <h1>Timelines</h1>
-        <div
-            class="listItem"
-            v-for="timeline in timelineStore.timelines"
-            :key="timeline.name"
-        >
-            {{ timeline.name }}
+        <div v-for="timeline in timelineStore.timelines" :key="timeline.name">
+            <NuxtLink :to="`/timelines/${timeline._id}`">
+                <div class="listItem">
+                    {{ timeline.name }}
+                </div>
+            </NuxtLink>
         </div>
         <div v-if="timelineStore.timelines.length === 0">
             <h3>There are no timelines!</h3>
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { useTimelineStore } from "../stores/timeline";
+import { useTimelineStore } from "../../stores/timeline";
 
 const timelineStore = useTimelineStore();
 
@@ -39,5 +39,6 @@ div {
     background-color: var(--color-background-mute);
     margin: 1em;
     border-radius: 8px;
+    color: var(--color-text);
 }
 </style>

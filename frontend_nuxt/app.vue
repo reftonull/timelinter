@@ -88,8 +88,8 @@ header {
     font-weight: 600;
     background-color: var(--vt-c-blue);
     color: #fff;
-    margin-right: 18px;
     padding: 8px 1em 8px 1em;
+    cursor: pointer;
 }
 
 html,body, #__nuxt, #__layout{

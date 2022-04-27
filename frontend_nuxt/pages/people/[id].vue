@@ -3,7 +3,7 @@
         <h1>Availability for {{ name }}</h1>
 
         <vue-cal
-            class="vuecal--blue-theme"
+            class="cal vuecal--blue-theme"
             :time="true"
             :disable-views="['years', 'year', 'month', 'day']"
             hide-view-selector
@@ -20,17 +20,20 @@
             :time-from="6 * 60"
             :time-to="23 * 60"
             :time-step="30"
+            @event-drag-create="createEvent"
+            @event-drop="updateEvent"
         />
+
+        <div @click="save" class="fancyBtn saveBtn">Save</div>
     </div>
 </template>
 
 <script setup>
 import { usePeopleStore } from "../../stores/people";
 import VueCal from "vue-cal";
+import { v4 as uuid } from "uuid";
 import "vue-cal/dist/vuecal.css";
-import 'vue-cal/dist/drag-and-drop.js'
-
-let events = []
+import "vue-cal/dist/drag-and-drop.js";
 
 const route = useRoute();
 const peopleStore = usePeopleStore();
@@ -39,11 +42,49 @@ const personId = route.params.id;
 
 const person = await peopleStore.getPersonById(personId);
 
+const events = person.availability.map((e) => {
+    return {
+        id: uuid(),
+        start: new Date(e.startTime),
+        end: new Date(e.endTime),
+    };
+});
+
 const name = person.name ?? "An error occured";
+
+function createEvent(event) {
+    events.push({ ...event, id: uuid() });
+}
+
+function updateEvent(obj) {
+    const index = events.findIndex((e) => e.id === obj.event.id);
+    console.log(index);
+    if (index !== -1) {
+        events[index] = obj.event;
+    }
+}
+
+function save() {
+    console.log(events);
+    peopleStore.updateAvail(personId, events);
+}
 </script>
 
 <style scoped>
 .container {
-    height: 100%;
+    height: 70%;
+}
+
+.cal {
+    border: 2px solid var(--color-border);
+    border-radius: 10px;
+    margin-top: 1em;
+}
+
+.saveBtn {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-right: 0;
+    float: right;
 }
 </style>

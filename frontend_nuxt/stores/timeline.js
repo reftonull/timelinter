@@ -22,6 +22,27 @@ export const useTimelineStore = defineStore({
             this.timelines = response.data.timelines;
         },
 
+        getTimeline(id) {
+            console.log(this.timelines);
+            return this.timelines.find((t) => t._id === id);
+        },
+
+        async addPerson(pid, tid) {
+            const options = useOptionsStore();
+            await options.setTokenFromStorage();
+
+            const response = await axios.post(
+                "/secure/timeline/addperson?secret_token=" + options.token,
+                {
+                    pid: pid,
+                    tid: tid,
+                }
+            );
+            console.log(response.data);
+
+            return true;
+        },
+
         async addTimeline(name) {
             const options = useOptionsStore();
             await options.setTokenFromStorage();

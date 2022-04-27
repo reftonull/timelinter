@@ -41,6 +41,24 @@ router.post("/timelines/add", async (req, res) => {
     }
 });
 
+router.post("/timeline/addperson", async (req, res) => {
+    try {
+        const timeline = await Timeline.findById(req.body.tid).exec();
+        timeline.people.push(req.body.pid);
+
+        const doc = await timeline.save();
+        
+        console.log("timeline is ", doc);
+        res.json({
+            success: true,
+            timeline: doc,
+        });
+    } catch (e) {
+        console.log(e);
+        res.json({ success: false, err: "An error occured." });
+    }
+});
+
 router.post("/people/add", async (req, res) => {
     try {
         console.log(req.body.uid);
@@ -76,6 +94,32 @@ router.get("/person", async (req, res) => {
     res.json({
         person,
     });
+});
+
+router.post("/person/update", async (req, res) => {
+    const avail = req.body.avail;
+    const pid = req.body.pid;
+
+    try {
+        const person = await Person.findById(pid).exec();
+
+        const blocks = avail.map((a) => {
+            return { startTime: a.startTime, endTime: a.endTime, person: pid };
+        });
+
+        person.availability = blocks;
+
+        const doc = await person.save();
+        console.log(doc);
+
+        res.json({
+            success: true,
+        });
+    } catch (e) {
+        res.json({
+            success: false,
+        });
+    }
 });
 
 module.exports = router;

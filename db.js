@@ -48,12 +48,15 @@ const Block = new mongoose.Schema({
 const Person = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     name: { type: String, required: true },
+    maxTime: { type: Number },
     availability: [Block],
 });
 
 const Timeline = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     name: { type: String, reqired: true },
+    people: [{ type: mongoose.Schema.Types.ObjectId, ref: "Person" }],
+    maxTime: { type: Number },
     blocks: [Block],
 });
 
