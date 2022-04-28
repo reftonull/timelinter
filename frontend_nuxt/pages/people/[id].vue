@@ -37,6 +37,10 @@ import { v4 as uuid } from "uuid";
 import "vue-cal/dist/vuecal.css";
 import "vue-cal/dist/drag-and-drop.js";
 
+definePageMeta({
+    middleware: "auth",
+});
+
 const route = useRoute();
 const peopleStore = usePeopleStore();
 

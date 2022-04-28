@@ -19,6 +19,10 @@ import { useTimelineStore } from "../../stores/timeline";
 
 const timelineStore = useTimelineStore();
 
+definePageMeta({
+    middleware: "auth",
+});
+
 onMounted(async () => {
     console.log("timeline mounted");
     timelineStore.getTimelines();

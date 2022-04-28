@@ -121,6 +121,12 @@
     </div>
 </template>
 
+<script setup>
+definePageMeta({
+    middleware: "auth",
+});
+</script>
+
 <script>
 import VueCal from "vue-cal";
 import { v4 as uuid } from "uuid";

@@ -17,6 +17,10 @@
 <script setup>
 import { usePeopleStore } from "../../stores/people";
 
+definePageMeta({
+    middleware: "auth",
+});
+
 const peopleStore = usePeopleStore();
 
 onMounted(async () => {

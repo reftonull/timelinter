@@ -31,6 +31,10 @@ import axios from "axios";
 import { usePeopleStore } from "~~/stores/people";
 import { useTimelineStore } from "~~/stores/timeline";
 
+definePageMeta({
+    middleware: "auth",
+});
+
 const timelineStore = useTimelineStore();
 const peopleStore = usePeopleStore();
 

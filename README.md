@@ -8,7 +8,7 @@ Making schedules for small teams is really difficult if there are contstraints o
 
 If there is a maximum number of people that can be on shift at one time, or if there is a maximum number of hours on payroll, things get really complicated. Timelinter is an attempt to fix that. It is a schedule maker that will complain if constraints are violated.
 
-It's essentially a linter for schedules. 
+It's essentially a linter for schedules.
 
 ## Data Model
 
@@ -42,6 +42,7 @@ An Example Timeline:
 ```
 
 An Example Person:
+
 ```javascript
 {
   name: "Alyssa P. Hacker"
@@ -63,7 +64,7 @@ An Example Person:
 
 /timeline - page for showing all timelines
 
-/timeline/slug - page for showing specific timeline 
+/timeline/slug - page for showing specific timeline
 
 ## Site map
 
@@ -71,25 +72,24 @@ An Example Person:
 
 ## User Stories or Use Cases
 
-(**TODO**: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)\_)
-
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+3. as a user, I can add timelines to the site
+4. as a user, I can add people to the site
+5. as a user, I can add a person's availability to their record
+6. as a user, I can add people to timelines; their availability will be shown when you click on them
+7. as a user, I can add assigned blocks to people within timelines
+8. As a user, I can see any problems (including blocks assigned outside people's availability)
 
 ## Research Topics
 
--   (5 points) Integrate user authentication
+-   (3 points) Integrate user authentication
     -   I'm going to be using passport for user authentication
-    -   The [Google OAuth passport](https://github.com/jaredhanson/passport-google-oauth2) package will be used to hook into Google Calendar
-    -   And account has been made for testing; I'll email you the password
+    -   And account has been made for testing; the password will be in the form
 -   (5 points)
     -   used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
 
-10 points total out of 8 required points 
+8 points total out of 8 required points
 
 ## [Link to Initial Main Project File](app.js)
 
