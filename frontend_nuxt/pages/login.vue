@@ -2,8 +2,9 @@
     <div class="form">
         <h1>Login</h1>
         <input type="text" placeholder="Email" v-model="email" />
-        <input type="password" placeholder="Password" v-model="password" />
+        <input @keyup.enter="login" type="password" placeholder="Password" v-model="password" />
         <div @click="login" class="btn">Login</div>
+        <div class="error">{{ err }}</div>
     </div>
 </template>
 
@@ -15,6 +16,8 @@ const password = useState("password", () => "");
 
 const options = useOptionsStore();
 
+const err = ref("");
+
 async function login() {
     const result = await options.login(email.value, password.value);
 
@@ -23,6 +26,12 @@ async function login() {
         password.value = "";
 
         navigateTo("/timelines");
+    } else {
+        // console.log(result.error);
+        email.value = "";
+        password.value = "";
+
+        err.value = result.error;
     }
 }
 </script>
@@ -61,6 +70,10 @@ input {
     background-color: var(--vt-c-blue);
     color: #fff;
     padding: 8px 1em 8px 1em;
+}
+
+.error {
+    color: rgb(205, 103, 103);
 }
 
 .form {

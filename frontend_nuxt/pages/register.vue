@@ -2,8 +2,15 @@
     <div class="form">
         <h1>Register</h1>
         <input type="text" placeholder="Email" v-model="email" />
-        <input type="password" placeholder="Password" v-model="password" />
+        <input
+            @keyup.enter="login"
+            type="password"
+            placeholder="Password"
+            v-model="password"
+        />
         <div @click="register" class="btn">Register</div>
+        <div class="error">{{ err }}</div>
+        <div class="success">{{ success }}</div>
     </div>
 </template>
 
@@ -13,13 +20,20 @@ import axios from "axios";
 const email = useState("emailReg", () => "");
 const password = useState("passwordReg", () => "");
 
-async function register() {
-    const response = await axios.post("/api/register", {
-        email: email.value,
-        password: password.value,
-    });
+const err = useState("err", () => "");
+const success = useState("success", () => "");
 
-    console.log(response.data);
+async function register() {
+    try {
+        const response = await axios.post("/api/register", {
+            email: email.value,
+            password: password.value,
+        });
+
+        success.value = "Registration succeeded";
+    } catch (e) {
+        err.value = "Registration failed";
+    }
 }
 </script>
 
@@ -57,6 +71,14 @@ input {
     background-color: var(--vt-c-blue);
     color: #fff;
     padding: 8px 1em 8px 1em;
+}
+
+.error {
+    color: rgb(205, 103, 103);
+}
+
+.success {
+    color: rgb(103, 205, 118);
 }
 
 .form {

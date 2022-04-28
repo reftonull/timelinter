@@ -37,7 +37,7 @@ div {
     padding: 1em;
     text-align: left;
     background-color: var(--color-background-mute);
-    margin: 1em;
+    margin: 1em 0;
     border-radius: 8px;
     color: var(--color-text);
 }

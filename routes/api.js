@@ -9,6 +9,7 @@ router.post(
     passport.authenticate("register", { session: false }),
     async (req, res) => {
         res.json({
+            success: true,
             message: "Signup successful",
         });
     }
@@ -18,7 +19,7 @@ router.post("/login", async (req, res, next) => {
     passport.authenticate("login", async (err, user) => {
         try {
             if (err || !user) {
-                return res.json({ error: "Login failed." });
+                return res.json({ success: false, error: "Login failed." });
             }
 
             req.login(user, { session: false }, async (error) => {
@@ -29,7 +30,7 @@ router.post("/login", async (req, res, next) => {
                 const body = { _id: user._id, email: user.email };
                 const token = jwt.sign({ user: body }, secret);
 
-                return res.json({ token, user: body });
+                return res.json({ success: true, token, user: body });
             });
         } catch (error) {
             return next(error);

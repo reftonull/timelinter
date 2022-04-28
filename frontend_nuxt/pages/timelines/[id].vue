@@ -19,15 +19,26 @@
                 :time-from="6 * 60"
                 :time-to="23 * 60"
                 :time-step="30"
-                selected-date="2022-04-26"
+                selected-date="2022-08-01"
                 @event-drop="updateEvent"
                 @event-duration-change="updateEvent"
+                @event-drag-create="createEnd"
                 :on-event-create="onEventCreate"
             />
             <div class="sidebar">
                 <div class="segmented">
-                    <div @click="selected = 'People'">People</div>
-                    <div @click="selected = 'Problems'">Problems</div>
+                    <div
+                        @click="selected = 'People'"
+                        :class="{ selected: selected === 'People' }"
+                    >
+                        People
+                    </div>
+                    <div
+                        @click="selected = 'Problems'"
+                        :class="selected === 'Problems' ? 'selected' : ''"
+                    >
+                        Problems
+                    </div>
                 </div>
                 <div class="sidebarContainer" v-if="selected === 'People'">
                     <div v-for="person in people" :key="person.name">
@@ -164,7 +175,7 @@ export default {
                 this.$options.blocks
             );
 
-            console.log("saved");
+            this.$router.push("/timelines");
         },
 
         initEvents() {
@@ -198,6 +209,10 @@ export default {
             this.analyseTimes();
 
             return event;
+        },
+
+        createEnd(obj) {
+            this.analyseTimes();
         },
 
         updateEvent(obj) {

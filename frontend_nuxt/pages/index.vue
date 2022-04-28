@@ -1,3 +1,5 @@
 <template>
-  <h1>Index page</h1>
+    <div>
+        Welcome to TimeLinter, an application designed to help you schedule.
+    </div>
 </template>

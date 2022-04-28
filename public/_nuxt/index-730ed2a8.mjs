@@ -1,0 +1,1 @@
+import{_ as e,o as c,c as n}from"./entry-90740ebb.mjs";const o={};function t(r,a){return c(),n("div",null," Welcome to TimeLinter, an application designed to help you schedule. ")}var l=e(o,[["render",t]]);export{l as default};

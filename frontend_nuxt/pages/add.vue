@@ -1,8 +1,18 @@
 <template>
     <div class="form">
-        <div class="buttonRow">
-            <div class="normalBtn" @click="selected = 'Timeline'">Timeline</div>
-            <div class="normalBtn" @click="selected = 'Person'">Person</div>
+        <div class="segmented">
+            <div
+                @click="selected = 'Timeline'"
+                :class="selected === 'Timeline' ? 'selected' : ''"
+            >
+                Timeline
+            </div>
+            <div
+                @click="selected = 'Person'"
+                :class="selected === 'Person' ? 'selected' : ''"
+            >
+                Person
+            </div>
         </div>
         <div class="form" v-if="selected === 'Timeline'">
             <input type="text" placeholder="Name" v-model="tName" />
@@ -41,12 +51,20 @@ async function tAdd() {
 </script>
 
 <style scoped>
-.buttonRow {
+.segmented {
+    border-radius: 10px;
+    background-color: var(--color-background-soft);
     display: flex;
     flex-direction: row;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
+}
+
+.segmented > div {
+    border-radius: 10px;
+    margin: 4px;
+    background-color: var(--color-background-mute);
+    flex: 1 1 0;
+    text-align: center;
+    cursor: pointer;
 }
 
 .normalBtn {
@@ -90,6 +108,10 @@ input {
     flex-direction: column;
     gap: 2em;
     align-items: center;
+}
+
+.selected {
+    background-color: var(--color-background-light) !important;
 }
 
 .form > * {

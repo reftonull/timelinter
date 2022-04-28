@@ -2,7 +2,10 @@
     <div class="appContainer">
         <!-- Markup shared across all pages, ex: NavBar -->
         <header>
-            <div class="logo">TIME<strong>LINTER</strong></div>
+            <div class="logo">
+                TIME
+                <span class="bold">LINTER</span>
+            </div>
             <div class="spacer"></div>
             <div v-if="!options.token" class="buttonRow">
                 <NuxtLink to="/register"
@@ -44,6 +47,7 @@ onMounted(() => {
 
 <style>
 @import "@/assets/base.css";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap");
 
 header {
     display: flex;
@@ -51,8 +55,13 @@ header {
     align-items: center;
 }
 
+.bold {
+    font-weight: 700;
+}
+
 .logo {
     font-size: 2.5rem;
+    display: inline;
 }
 
 .spacer {
@@ -92,9 +101,15 @@ header {
     cursor: pointer;
 }
 
-html,body, #__nuxt, #__layout{
-  height:100%!important;
-  width: 100%!important;
+html,
+body,
+#__nuxt,
+#__layout {
+    height: 100% !important;
+    width: 100% !important;
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
 }
 
 .appContainer {

@@ -20,6 +20,7 @@
             :time-from="6 * 60"
             :time-to="23 * 60"
             :time-step="30"
+            selected-date="2022-08-01"
             @event-drag-create="createEvent"
             @event-drop="updateEvent"
             @event-duration-change="updateEvent"
@@ -68,6 +69,7 @@ function updateEvent(obj) {
 function save() {
     console.log(events);
     peopleStore.updateAvail(personId, events);
+    navigateTo("/people");
 }
 </script>
 
