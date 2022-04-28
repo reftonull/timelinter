@@ -13,7 +13,6 @@ const User = new mongoose.Schema({
         type: String,
         required: true,
     },
-    lists: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
     people: [{ type: mongoose.Schema.Types.ObjectId, ref: "Person" }],
     timelines: [{ type: mongoose.Schema.Types.ObjectId, ref: "Timeline" }],
 });

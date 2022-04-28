@@ -85,11 +85,6 @@ declare global {
   const useCssVars: typeof import('vue')['useCssVars']
   const useSlots: typeof import('vue')['useSlots']
   const useTransitionState: typeof import('vue')['useTransitionState']
-  const useToken: typeof import('../../frontend_nuxt/composables/states')['useToken']
-  const useUid: typeof import('../../frontend_nuxt/composables/states')['useUid']
-  const useEmail: typeof import('../../frontend_nuxt/composables/states')['useEmail']
-  const useTimelines: typeof import('../../frontend_nuxt/composables/states')['useTimelines']
-  const usePeople: typeof import('../../frontend_nuxt/composables/states')['usePeople']
   const definePageMeta: typeof import('../../frontend_nuxt/node_modules/nuxt/dist/pages/runtime/composables')['definePageMeta']
 }
 export {}

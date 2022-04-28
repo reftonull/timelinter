@@ -1,5 +1,3 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "**TODO**" with details specific to your project. Remove the "TODO" lines.
-
 # Timelinter
 
 ## Overview
@@ -12,22 +10,22 @@ It's essentially a linter for schedules.
 
 ## Data Model
 
-(**TODO**: a description of your application's data and their relationships to each other\_)
-
 The application will store Users, Timelines, and People
 
 -   users can have multiple timelines (by reference)
--   each timline can have multiple people (by reference)
-
-(**TODO**: sample documents\_)
+-   each timeline can have multiple people attatched to it (by reference)
+-   each timeline will have multiple blocks assigned within it
+-   users can have multiple people (by reference)
+-   each person can have multiple "availabilty blocks" within in
 
 An Example User:
 
 ```javascript
 {
   username: "shannonshopper",
-  hash: // a password hash,
+  password: // a password hash,
   timelines: // an array of references to Timeline documents
+  people: // an array of references to Person documents
 }
 ```
 
@@ -38,6 +36,7 @@ An Example Timeline:
   user: // a reference to a User object
   name: "Tutoring",
   people: // an array of references to Person documents
+  blocks: // an array of Block documents stored within the timeline
 }
 ```
 
@@ -46,29 +45,49 @@ An Example Person:
 ```javascript
 {
   name: "Alyssa P. Hacker"
-  timeline: // a reference to a Timeline
-  availability: // array of available times
-  chosen: // array of scheduled times
+  user: // a reference to a User object
+  availability: // an array of Block documents stored within the timeline
 }
 ```
 
-## [Link to Commented First Draft Schema](db.js)
+An Example Block:
 
-(**TODO**: create a first draft of your Schemas in db.js and link to it\_)
+```javascript
+{
+  person: // a reference to a Person object (to whom this block belongs)
+  startTime: // a JS Date object
+  endTime: // a JS Date object
+}
+```
+
+## [Database Schema](db.js)
 
 ## Wireframes
 
-(**TODO**: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc.\_)
+/register - for the user to register
+![Register](images/register.png)
 
-/timeline/create - page for creating a new timeline
+/login - for the user to login
+![Login](images/login.png)
 
-/timeline - page for showing all timelines
+/add - page for creating timelines and people
+![Add](images/add.png)
 
-/timeline/slug - page for showing specific timeline
+/timelines - page for showing all timelines
+![Timelines](images/timelines.png)
+
+/timeline/[id] - page for showing specific timeline
+![Timelines](images/timelines_id.png)
+
+/people - page for showing all people
+![Timelines](images/people.png)
+
+/people/[id] - page for showing specific timeline
+![Timelines](images/people_id.png)
 
 ## Site map
 
-(**TODO**: draw out a site map that shows how pages are related to each other\_)
+![Sitemap](images/sitemap.png)
 
 ## User Stories or Use Cases
 
@@ -80,6 +99,19 @@ An Example Person:
 6. as a user, I can add people to timelines; their availability will be shown when you click on them
 7. as a user, I can add assigned blocks to people within timelines
 8. As a user, I can see any problems (including blocks assigned outside people's availability)
+
+This is a complicated project. To get familiar with it, I'd recommend following these steps:
+
+1. Register
+2. Login
+
+3. Add timeline (in /add)
+4. Add a few people (in /add)
+5. Add availability to people (in /people/[id])
+6. Add people to timeline (in /timeline/[id])
+
+7. Add blocks to timeline by clicking on the person you want to assign those blocks
+8. Look at the Problems tab to see if there are any people whose assigned blocks are outside availability
 
 ## Research Topics
 
@@ -95,4 +127,6 @@ An Example Person:
 
 ## Annotations / References Used
 
-(**TODO**: list any tutorials/references/etc. that you've based your code off of\_)
+[Nuxt.JS](https://v3.nuxtjs.org/)
+[VueCal](https://antoniandre.github.io/vue-cal/#api)
+[VueRouter](https://router.vuejs.org/)
