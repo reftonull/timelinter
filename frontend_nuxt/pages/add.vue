@@ -42,9 +42,6 @@ const selected = useState("selectedAdd", () => "Timeline");
 const tName = useState("tName", () => "");
 const pName = useState("pName", () => "");
 
-const uid = useUid();
-const token = useToken();
-
 function pAdd() {
     peopleStore.addPerson(pName.value);
 }
