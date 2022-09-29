@@ -8,6 +8,22 @@ If there is a maximum number of people that can be on shift at one time, or if t
 
 It's essentially a linter for schedules.
 
+This is a complicated project, whose user experience still needs work. To get familiar with it, I'd recommend following these steps:
+
+1. Register
+2. Login
+
+3. Add timeline (in /add)
+4. Add a few people (in /add)
+5. Add availability to people (in /people/[id])
+6. Add people to timeline (in /timeline/[id])
+
+7. Add blocks to timeline by clicking on the person you want to assign those blocks
+8. Look at the Problems tab to see if there are any people whose assigned blocks are outside availability
+
+### Demo: https://timelinter.herokuapp.com/
+This will have to move soon as Heroku winds down its free plan.
+
 ## Data Model
 
 The application will store Users, Timelines, and People
@@ -62,7 +78,7 @@ An Example Block:
 
 ## [Database Schema](db.js)
 
-## Wireframes
+## Screenshots
 
 /register - for the user to register
 ![Register](images/register.png)
@@ -99,29 +115,6 @@ An Example Block:
 6. as a user, I can add people to timelines; their availability will be shown when you click on them
 7. as a user, I can add assigned blocks to people within timelines
 8. As a user, I can see any problems (including blocks assigned outside people's availability)
-
-This is a complicated project. To get familiar with it, I'd recommend following these steps:
-
-1. Register
-2. Login
-
-3. Add timeline (in /add)
-4. Add a few people (in /add)
-5. Add availability to people (in /people/[id])
-6. Add people to timeline (in /timeline/[id])
-
-7. Add blocks to timeline by clicking on the person you want to assign those blocks
-8. Look at the Problems tab to see if there are any people whose assigned blocks are outside availability
-
-## Research Topics
-
--   (3 points) Integrate user authentication
-    -   I'm going to be using passport for user authentication
-    -   And account has been made for testing; the password will be in the form
--   (5 points)
-    -   used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
-
-8 points total out of 8 required points
 
 ## [Link to Initial Main Project File](app.js)
 
