@@ -38,4 +38,21 @@ router.post("/login", async (req, res, next) => {
     })(req, res, next);
 });
 
+router.get("/test", async (req, res) => {
+    console.log("testing here");
+    res.redirect("/");
+});
+
+router.get("/google", passport.authenticate("google"));
+
+router.get(
+    "/oauth2/redirect/google",
+    passport.authenticate("google", {
+        failureRedirect: "/api/test",
+    }),
+    function (req, res) {
+        res.redirect("/");
+    }
+);
+
 module.exports = router;
